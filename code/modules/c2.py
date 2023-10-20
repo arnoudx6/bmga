@@ -1,5 +1,8 @@
+#This will be run when the module is imported
+c2ApiKey = "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"
+
 def get():
-    print("hello world")
+    return ("hello world")
 
 def push(message):
-    print(message)
+    return True
