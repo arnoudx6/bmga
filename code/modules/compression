@@ -1,2 +1,0 @@
-def decompress(compressedText: str):
-    return True, "ccc"
