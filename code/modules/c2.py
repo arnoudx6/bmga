@@ -1,5 +1,3 @@
-
-
 def get():
     return ("hello world")
 

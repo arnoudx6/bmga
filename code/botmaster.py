@@ -30,17 +30,3 @@ waitingForC2ToSend = True
 while waitingForC2ToSend:
     #
     dataToSend = input("Input ....")
-
-    #Serialize the input
-    serializedText = dataToSend
-
-    #Compress the input to make the data smaller to send
-    compressedText = compressionModule.compress(serializedText)
-
-    #Use steganography to embed the embedded text into the stego text
-    embeddedText = compressedText
-    stegoText = stegoModule.embedEmbeddedTextInStegoText(embeddedText, "bbb")
-
-    #Push the stego text to the C&C
-    c2Module.push()
-
