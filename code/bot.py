@@ -1,3 +1,4 @@
+header = """
 #####################################################################
 ### ____  _  _   ___   __     ____   __  ____                     ###
 ###(  _ \( \/ ) / __) / _\   (  _ \ /  \(_  _)                    ###
@@ -13,6 +14,8 @@
 ### Upon completion and evaluation, the thesis will be published on the associated GitHub page.                             #
 ### For further information or inquiries, please visit https://github.com/arnoudx6/bmga.                                    #
 #############################################################################################################################
+"""
+print(header)
 
 #Import standard modules
 import time
