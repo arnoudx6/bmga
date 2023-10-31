@@ -1,11 +1,12 @@
+appHeader = """
 #####################################################################
 ### ____  _  _   ___   __     ____   __  ____                     ###
 ###(  _ \( \/ ) / __) / _\   (  _ \ /  \(_  _)                    ###
 ### ) _ (/ \/ \( (_ \/    \   ) _ ((  O ) )(                      ###
 ###(____/\_)(_/ \___/\_/\_/  (____/ \__/ (__)                     ###
 ###---------------------------------------------------------------###
-### A bot for researching hidden botnet communication...          ###
-### By using generative AI for creating steganographic stego text ###
+### A bot for researching hidden botnet communication.            ###
+### By using generative AI for creating steganographic stego-text ###
 ###---------------------------------------------------------------###########################################################
 ### I, Arnoud Stolk, explicitly declare that I bear no responsibility for the application or misapplication of this project.#
 ### This project has been developed solely for research purposes.                                                           #
@@ -13,20 +14,35 @@
 ### Upon completion and evaluation, the thesis will be published on the associated GitHub page.                             #
 ### For further information or inquiries, please visit https://github.com/arnoudx6/bmga.                                    #
 #############################################################################################################################
+"""
+
+#First print a the cool header also warning the user that I bear no responsiblilty for the abuse
+print(appHeader)
 
 #Import standard modules
 import time
-import openai
 
 #Import custom modules
-import modules.c2 as c2Module
-import modules.stego as stegoModule
-import modules.compression as compressionModule
-import modules.crypto as cryptoModModule
+import shared_modules.c2 as c2Module
+import shared_modules.stego as stegoModule
 
 #Initialize script variables
-waitingForC2ToSend = True
+keepBotmasterActive = True
 
-while waitingForC2ToSend:
-    #
-    dataToSend = input("Input ....")
+while keepBotmasterActive:
+    
+
+    #Ask for an instruction to send
+    stegoAlgorithm = input("Stego Algorithm:") 
+    embeddedText = input("Command to send: ")
+    
+    #Call the stego library and embed the embedded-text in a stego-text
+    success, stegoText = stegoModule.embedEmbeddedTextInStegoText(embeddedText=embeddedText, stegoAlgorithm=stegoAlgorithm, stegoKey="blabla")
+
+    if not success or not stegoText:
+        print("Error while embedding data")
+        continue #<-- Go to the next loop itteration
+
+
+
+    print(stegoText)

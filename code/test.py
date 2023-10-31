@@ -6,7 +6,7 @@ import openai
 
 openai.api_key = key
 messages = [ {"role": "system", "content": 
-			"You are a intelligent assistant."} ] 
+			"Je bent een systeem dat tekst tussen twee zinnen plakt. De twee zinnen mag je zelf bedenken, maar de tekst er tussen moet letterlijk overgenomen worden."} ] 
 while True: 
 	message = input("User : ") 
 	if message: 
