@@ -12,13 +12,18 @@ def generateStegoText(stegoAlgorithm: str, embeddedText: str):
     success: bool = False
 
     try:
-        #Retrieve the configuration based on the selected stego algorithm
+        #Retrieve the configuration based on the selected stego algorithm  
         stegoAlgorithmConfig = [algorithm for algorithm in aiConfig["stegoAlgorithms"] if algorithm["name"] == stegoAlgorithm][0]
+
 
         #Prepare a list of messages that will instruct the AI how to embed the embeddedText
         aiModel = stegoAlgorithmConfig["aiModel"] #Retrieving the AI model from the configuration
-        aiMessages = [json.loads(stegoAlgorithmConfig["aiMessages"][0])] #Abusing the json library to covert a string dict into a dict :)
-        aiMessages.append({"role": "user", "content": "{0}".format(embeddedText)})
+        aiMessages = [] #Abusing the json library to covert a string dict into a dict :)
+
+        for message in stegoAlgorithmConfig["aiMessages"]:
+            aiMessages.append({"role": "system", "content": message})
+
+        aiMessages.append({"role": "user", "content": embeddedText})
 
         #Call the API and wait for a reply
         aiChat = openai.ChatCompletion.create(model=aiModel, messages=aiMessages) 
