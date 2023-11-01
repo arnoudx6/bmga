@@ -29,6 +29,8 @@ import shared_modules.stego as stegoModule
 
 #Initialize script variables
 keepBotmasterActive = True
+
+#Get valid stego algorithms and make them uppercase
 validStegoAlgorithms = stegoModule.getValidStegoAlgorithms()
 
 logger.debug("Botmaster ready starting the command loop")

@@ -2,6 +2,7 @@ import openai
 import json
 from loguru import logger
 import subprocess
+import os
 
 #Set the openAI key for the whole module
 openai.api_key = open('./code/conf/ai.key').readlines()[0]
@@ -55,14 +56,19 @@ def generateStegoTextWithLLAMA(stegoAlgorithmConfig: dict, embeddedText: str, co
         #Input and an output file as parameter. The input file needs to be created first.
 
         #Get the location of the llama.cpp from the config
+        aiProgramPath = stegoAlgorithmConfig["programPath"]
+        aiInputFilePath = os.path.join(aiProgramPath, "input.txt")
+        aiOutputFilePath = os.path.join(aiProgramPath, "output.txt")
+
+        aiTokens = stegoAlgorithmConfig["aiTokens"]
 
         #Create the input file with the embedded-text
         with open('input.txt', 'w') as inputFile:
             inputFile.write(embeddedText)
 
         #Start the llama.cpp program as subprocess
-        llamacppEncodeArguments = ['./main', '-e input.txt -p "{0}" -m models/7B/ggml-model-q4_0.converted.bin > output.txt'.format(coverContext)]
-        subprocess.call(llamacppEncodeArguments)
+        aiProgramArguments = [aiProgramPath, '-e input.txt -p "{0}" -m models/7B/ggml-model-q4_0.converted.bin -n {1} > output.txt'.format(coverContext, aiTokens)]
+        subprocess.call(aiProgramArguments)
 
         #Retrieve the stego-text from the output file
         
