@@ -1,1 +1,43 @@
+Bewaren:https://til.simonwillison.net/llms/llama-7b-m2
+
+##Standaard LLAMA.CPP
 git clone https://github.com/ggerganov/llama.cpp --branch master-53dbba7
+
+cd naar de llama.cpp folder
+
+make
+
+Download model van https://huggingface.co/Pi3141/alpaca-native-7B-ggml/resolve/main/ggml-model-q4_0.bin
+Download een tokenizer van https://huggingface.co/HuggingFaceM4/llama-7b-tokenizer/resolve/main/tokenizer.model
+
+Plaats model models/7B/ggml-model-q4_0.bin
+Plaats tokenizer in models/tokenizer.model
+
+#Het model heeft geen versie en moet het wel hebben. Converteer het model eerst naar een model met versie.
+python3 convert-unversioned-ggml-to-ggml.py models/7B models/tokenizer.model
+
+#Het model moet nog een keer geconverteerd worden (waarom weet ik niet).
+python3 migrate-ggml-2023-03-30-pr613.py models/7B/ggml-model-q4_0.bin models/7B/ggml-model-q4_0.converted.bin
+
+#Nu moet het werken
+./main -m ./models/7B/ggml-model-q4_0.converted.bin -p "Een website bouwen doe je met"
+
+
+##Aanpassingen voor stego
+maak een backup van de werkende configuratie
+
+#Download de patch file met:
+curl https://botnoise.org/~pokes/lluffman/lluffman.patch > lluffman.patch  
+
+#Voer de patch uit met:
+patch < lluffman.patch
+
+#Compile de software opnieuw met het make commando
+
+Maak een test file genaamd input.txt met een geheim bericht
+
+Embed het geheime bericht
+./main -e input.txt -p "Larry" -m models/7B/ggml-model-q4_0.converted.bin > output.txt
+
+Extract het geheime bericht
+./main -d output.txt -p "Larry" > output2.txt -m models/7B/ggml-model-q4_0.converted.bin
