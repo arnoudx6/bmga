@@ -1,6 +1,7 @@
 import openai
 import json
 from loguru import logger
+import subprocess
 
 #Set the openAI key for the whole module
 openai.api_key = open('./code/conf/ai.key').readlines()[0]
@@ -43,7 +44,7 @@ def generateStegoTextWithChatGPT(stegoAlgorithmConfig: dict, embeddedText: str, 
         success = False
     return success, stegoText
 
-def generateStegoTextWithLLAMA(stegoAlgorithm: str, embeddedText: str, coverContext: str, botName: str, stegoKey: str):
+def generateStegoTextWithLLAMA(stegoAlgorithmConfig: dict, embeddedText: str, coverContext: str, botName: str, stegoKey: str):
     success: bool = False
     try:
         #The llama.cpp program is created by someone else and is copied from https://github.com/ggerganov/llama.cpp
@@ -53,11 +54,17 @@ def generateStegoTextWithLLAMA(stegoAlgorithm: str, embeddedText: str, coverCont
         #Because it is not my code the integration is not optimal. The botnoise modifications to the program wants an
         #Input and an output file as parameter. The input file needs to be created first.
 
+        #Get the location of the llama.cpp from the config
+
         #Create the input file with the embedded-text
+        with open('input.txt', 'w') as inputFile:
+            inputFile.write(embeddedText)
 
-        #Start the llama.cpp program
+        #Start the llama.cpp program as subprocess
+        llamacppEncodeArguments = ['./main', '-e input.txt -p "{0}" -m models/7B/ggml-model-q4_0.converted.bin > output.txt'.format(coverContext)]
+        subprocess.call(llamacppEncodeArguments)
 
-        #Retrieve the stegotext from the output program
+        #Retrieve the stego-text from the output file
         
 
 
