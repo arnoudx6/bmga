@@ -5,7 +5,7 @@
 
 ## Disclaimer
 
-I, Arnoud Stolk, hereby explicitly declare that I assume no responsibility for the application or misapplication of the contents of this project. This project has been developed strictly for academic and research purposes. The source code and accompanying materials are provided to support my thesis. Upon its completion and subsequent evaluation, the thesis, along with the associated code, will be published on this GitHub page. For additional information or inquiries, please visit the repository at [https://github.com/arnoudx6/bmga](https://github.com/arnoudx6/bmga).
+I, Arnoud Stolk, hereby explicitly declare that I assume no responsibility for the application or misapplication of the contents of this project. This project has been developed strictly for academic and research purposes. The source code and accompanying materials are provided to support my thesis. For additional information or inquiries, please visit the repository at [https://github.com/arnoudx6/bmga](https://github.com/arnoudx6/bmga).
 
 ---
 
