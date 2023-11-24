@@ -1,5 +1,5 @@
 # Botnet met Generatieve AI (BMGA)
-### A Research Tool for Concealing Botnet Communication Using Generative AI to Create Stego-text
+### A Research Tool for concealing Botnet Communication Using Generative AI to Create Stego-text
 
 ---
 
